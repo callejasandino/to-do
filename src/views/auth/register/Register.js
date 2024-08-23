@@ -14,12 +14,18 @@ export default defineComponent({
     const credentials = reactive({
       name: '',
       email: '',
-      password: ''
+      password: '',
+      password_confirmation: ''
     })
 
     const register = async () => {
       if (!credentials.email || !credentials.password || !credentials.name) {
         notify.error('Fullname, Email and Password must not be empty.')
+        return
+      }
+
+      if (credentials.password !== credentials.password_confirmation) {
+        notify.error('Password did not match')
         return
       }
 
